@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# IBShorter
 
-## Getting Started
+This is an url shortener app project build on NEXT.js, Supabase, and Chakra UI
 
-First, run the development server:
+## Thought process
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+CLIENT -> request to -> URL -> which is an API route to -> ORIGINAL LINK IN DATABASE
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Example URL: https://ibshort.xyz/[user_name]/[platform_name]
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+API ENDPOINTS:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.tsx`.
+    /api/v1/
+            /service/:username/:platform -> FOR REDIRECTION
+            check if username exists in users table -> create username as index
+            if not, go for dummy retreival.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+            /service/create [params -> url of platform, token [for checking if user exists]
 
-To learn more about Next.js, take a look at the following resources:
+            /user/sign-up
+            /user/login
+            /user/forgot
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+            /contact
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[user_name] => unique entry in database cannot be email characters before @ because 2 different email providers can have
+clashing names before @ or it will be crypto random url
 
-## Deploy on Vercel
+Therefore,
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Sign Up Form -> Username [must]
+-> Email/Phone/Google/whatever -> No remember me because JWT Auth
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+TABLES:
+
+users id [p], username[u], email[u], password, name, profile_picture, created_at, updated_at
+
+urls id[p], [user_id[f], platform][c], redirect, created_at, updated_at
+
+dummy -> 30 days storage period for every record id[p], [dummy_user[u], platform][c], redirect, created_at, updated_at
+
+## Tasks
+
+UI Tasks
+
+- [ ] Landing page
+- [ ] CLIENT SIGN UP & LOGIN -> for named url shortener links
+- [ ] Menu chakra ui after login for username -> Dashboard, mylinks, settings
+- [ ] Avatar chakra ui
+- [ ] drawers for small screen -> left side with menu
+- [ ] alert boxes chakra ui for user actions -> delete created url
+- [ ] accordian for faqs in the home screen
+- [ ] ScaleFade transition for tasks in-progress/done alert

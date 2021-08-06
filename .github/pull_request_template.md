@@ -1,22 +1,22 @@
 # Related Issues
 
-*   issues goes here
+- issues goes here
 
-# Proposed Changes
+## Proposed Changes
 
-*   change 1
-*   change 2
+- change 1
+- change 2
 
-# Additional Info
+## Additional Info
 
-*   any additional information or context
+- any additional information or context
 
-# Checklist
+## Checklist
 
-*   [ ] Tests
-*   [ ] Translations
-*   [ ] Documentation
+- [ ] Tests
+- [ ] Translations
+- [ ] Documentation
 
-# Screenshots
+## Screenshots
 
 <table><tbody><tr><td><strong>Original Screenshot</strong></td><td><strong>Updated Screenshots</strong></td></tr><tr><td>** original screenshot **</td><td>** updated screenshot **</td></tr></tbody></table>
