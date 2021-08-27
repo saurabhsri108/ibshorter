@@ -11,6 +11,7 @@ import { ReactNode } from "react";
 import { bgColor } from "../styles/theme/colors";
 import { Provider } from "react-redux";
 import store from "../redux/store";
+import { AnimatePresence } from "framer-motion";
 
 type Props = {
   children: ReactNode;
@@ -19,7 +20,7 @@ type Props = {
 const GlobalStyles = ({ children }: Props) => {
   const { colorMode } = useColorMode();
   return (
-    <>
+    <AnimatePresence>
       <Global
         styles={css`
           html {
@@ -36,7 +37,7 @@ const GlobalStyles = ({ children }: Props) => {
         `}
       />
       {children}
-    </>
+    </AnimatePresence>
   );
 };
 

@@ -29,6 +29,7 @@ import {
 } from "../styles/theme/colors";
 import { signUpWithEmail } from "../redux/actions/user-actions";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 interface IForm {
   username: string;
@@ -100,224 +101,244 @@ const SignUp = () => {
         <link rel="icon" type="image/svg+xml" href="favicon.svg" />
       </Head>
       <Header />
-      <Flex
-        direction="column"
-        justify="center"
-        align="center"
-        p={["6"]}
-        color={fontColor(1)[colorMode]}
+
+      <motion.div
+        key="sign-up-page"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          stiffness: 20,
+        }}
+        exit={{ opacity: 0 }}
       >
-        <Heading
-          mb={["4", "10"]}
-          fontWeight={["600"]}
-          fontSize={["lg", "xl", "xl", "1.8rem"]}
-        >
-          Create an account
-        </Heading>
         <Flex
-          as="form"
           direction="column"
-          gridGap="1rem"
-          minW={["20rem", "30rem"]}
-          w={["100%", "36rem"]}
-          px={["1.5rem", "2rem"]}
-          onSubmit={submitHandler}
+          justify="center"
+          align="center"
+          p={["6"]}
+          color={fontColor(1)[colorMode]}
         >
-          <FormControl id="username" isRequired isInvalid={notUnique === true}>
-            <FormLabel fontSize={["sm", "md", "md", "md"]}>Username</FormLabel>
-            <Input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="uniqueness"
-              // pattern="^[a-z][0-9][_-]{3,15}$"
-              bg={bgInputField(0.6)[colorMode]}
-              focusBorderColor={bgCtaButtons(1)[colorMode]}
-              color={fontColor(0.8)[colorMode]}
-              borderColor={fontColor(0.3)[colorMode]}
-              fontSize={["sm", "md", "md", "md"]}
-              value={formState.username}
-              onChange={infoChangeHandler}
-              required
-            />
-            <FormErrorMessage>Username is already taken</FormErrorMessage>
-            <FormHelperText fontSize={["sm", "md", "md", "md"]}>
-              Username must be unique with only lowercase letters &amp; numbers
-            </FormHelperText>
-          </FormControl>
-          <FormControl id="email" isRequired>
-            <FormLabel fontSize={["sm", "md", "md", "md"]}>Email</FormLabel>
-            <Input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="johndoe@example.com"
-              bg={bgInputField(0.6)[colorMode]}
-              borderColor={fontColor(0.3)[colorMode]}
-              focusBorderColor={bgCtaButtons(1)[colorMode]}
-              fontSize={["sm", "md", "md", "md"]}
-              color={fontColor(0.8)[colorMode]}
-              value={formState.email}
-              onChange={infoChangeHandler}
-              required
-            />
-          </FormControl>
-          <FormControl id="password" isRequired isInvalid={matchError !== ""}>
-            <FormLabel fontSize={["sm", "md", "md", "md"]}>Password</FormLabel>
-            <InputGroup>
-              <Input
-                type={show ? "text" : "password"}
-                placeholder="********"
-                name="password"
-                id="password"
-                bg={bgInputField(0.6)[colorMode]}
-                borderColor={fontColor(0.3)[colorMode]}
-                focusBorderColor={bgCtaButtons(1)[colorMode]}
-                fontSize={["sm", "md", "md", "md"]}
-                color={fontColor(0.8)[colorMode]}
-                value={formState.password}
-                onChange={infoChangeHandler}
-                required
-              />
-              <InputRightElement width="4.5rem">
-                <Icon
-                  display="flex"
-                  align="center"
-                  justify="center"
-                  h="100%"
-                  fontSize="1.6rem"
-                  cursor="pointer"
-                  color={fontColor(0.8)[colorMode]}
-                  onClick={() => showHandler("password")}
-                >
-                  {show ? <IoMdEyeOff /> : <IoMdEye />}
-                </Icon>
-              </InputRightElement>
-            </InputGroup>
-            <FormErrorMessage>{matchError}</FormErrorMessage>
-          </FormControl>
-          <FormControl
-            id="confirm-password"
-            isRequired
-            isInvalid={matchError !== ""}
+          <Heading
+            mb={["4", "10"]}
+            fontWeight={["600"]}
+            fontSize={["lg", "xl", "xl", "1.8rem"]}
           >
-            <FormLabel fontSize={["sm", "md", "md", "md"]}>
-              Confirm Password
-            </FormLabel>
-            <InputGroup>
+            Create an account
+          </Heading>
+          <Flex
+            as="form"
+            direction="column"
+            gridGap="1rem"
+            minW={["20rem", "30rem"]}
+            w={["100%", "36rem"]}
+            px={["1.5rem", "2rem"]}
+            onSubmit={submitHandler}
+          >
+            <FormControl
+              id="username"
+              isRequired
+              isInvalid={notUnique === true}
+            >
+              <FormLabel fontSize={["sm", "md", "md", "md"]}>
+                Username
+              </FormLabel>
               <Input
-                type={showConfirm ? "text" : "password"}
-                placeholder="********"
-                name="confirm_password"
-                id="confirm_password"
+                type="text"
+                name="username"
+                id="username"
+                placeholder="uniqueness"
+                // pattern="^[a-z][0-9][_-]{3,15}$"
+                bg={bgInputField(0.6)[colorMode]}
+                focusBorderColor={bgCtaButtons(1)[colorMode]}
+                color={fontColor(0.8)[colorMode]}
+                borderColor={fontColor(0.3)[colorMode]}
+                fontSize={["sm", "md", "md", "md"]}
+                value={formState.username}
+                onChange={infoChangeHandler}
+                required
+              />
+              <FormErrorMessage>Username is already taken</FormErrorMessage>
+              <FormHelperText fontSize={["sm", "md", "md", "md"]}>
+                Username must be unique with only lowercase letters &amp;
+                numbers
+              </FormHelperText>
+            </FormControl>
+            <FormControl id="email" isRequired>
+              <FormLabel fontSize={["sm", "md", "md", "md"]}>Email</FormLabel>
+              <Input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="johndoe@example.com"
                 bg={bgInputField(0.6)[colorMode]}
                 borderColor={fontColor(0.3)[colorMode]}
                 focusBorderColor={bgCtaButtons(1)[colorMode]}
                 fontSize={["sm", "md", "md", "md"]}
                 color={fontColor(0.8)[colorMode]}
-                value={formState.confirm_password}
+                value={formState.email}
                 onChange={infoChangeHandler}
                 required
               />
-              <InputRightElement width="4.5rem">
-                <Icon
-                  display="flex"
-                  align="center"
-                  justify="center"
-                  h="100%"
-                  fontSize="1.6rem"
-                  cursor="pointer"
+            </FormControl>
+            <FormControl id="password" isRequired isInvalid={matchError !== ""}>
+              <FormLabel fontSize={["sm", "md", "md", "md"]}>
+                Password
+              </FormLabel>
+              <InputGroup>
+                <Input
+                  type={show ? "text" : "password"}
+                  placeholder="********"
+                  name="password"
+                  id="password"
+                  bg={bgInputField(0.6)[colorMode]}
+                  borderColor={fontColor(0.3)[colorMode]}
+                  focusBorderColor={bgCtaButtons(1)[colorMode]}
+                  fontSize={["sm", "md", "md", "md"]}
                   color={fontColor(0.8)[colorMode]}
-                  onClick={() => showHandler("confirm_password")}
+                  value={formState.password}
+                  onChange={infoChangeHandler}
+                  required
+                />
+                <InputRightElement width="4.5rem">
+                  <Icon
+                    display="flex"
+                    align="center"
+                    justify="center"
+                    h="100%"
+                    fontSize="1.6rem"
+                    cursor="pointer"
+                    color={fontColor(0.8)[colorMode]}
+                    onClick={() => showHandler("password")}
+                  >
+                    {show ? <IoMdEyeOff /> : <IoMdEye />}
+                  </Icon>
+                </InputRightElement>
+              </InputGroup>
+              <FormErrorMessage>{matchError}</FormErrorMessage>
+            </FormControl>
+            <FormControl
+              id="confirm-password"
+              isRequired
+              isInvalid={matchError !== ""}
+            >
+              <FormLabel fontSize={["sm", "md", "md", "md"]}>
+                Confirm Password
+              </FormLabel>
+              <InputGroup>
+                <Input
+                  type={showConfirm ? "text" : "password"}
+                  placeholder="********"
+                  name="confirm_password"
+                  id="confirm_password"
+                  bg={bgInputField(0.6)[colorMode]}
+                  borderColor={fontColor(0.3)[colorMode]}
+                  focusBorderColor={bgCtaButtons(1)[colorMode]}
+                  fontSize={["sm", "md", "md", "md"]}
+                  color={fontColor(0.8)[colorMode]}
+                  value={formState.confirm_password}
+                  onChange={infoChangeHandler}
+                  required
+                />
+                <InputRightElement width="4.5rem">
+                  <Icon
+                    display="flex"
+                    align="center"
+                    justify="center"
+                    h="100%"
+                    fontSize="1.6rem"
+                    cursor="pointer"
+                    color={fontColor(0.8)[colorMode]}
+                    onClick={() => showHandler("confirm_password")}
+                  >
+                    {showConfirm ? <IoMdEyeOff /> : <IoMdEye />}
+                  </Icon>
+                </InputRightElement>
+              </InputGroup>
+              <FormErrorMessage>{matchError}</FormErrorMessage>
+            </FormControl>
+            <FormControl>
+              {!isLoading && (
+                <Button
+                  type={"submit"}
+                  leftIcon={<FaUserPlus />}
+                  bg={bgCtaButtons(1)[colorMode]}
+                  _hover={{
+                    backgroundColor: bgCtaButtons(0.8)[colorMode],
+                  }}
+                  color={fontCtaColor[colorMode]}
+                  variant="solid"
+                  mt={"6"}
+                  textTransform={"uppercase"}
+                  fontWeight="600"
+                  fontFamily="inherit"
+                  p={["4", "8"]}
+                  fontSize={["sm", "md", "md", "md"]}
+                  borderRadius="0.2rem"
+                  w="100%"
                 >
-                  {showConfirm ? <IoMdEyeOff /> : <IoMdEye />}
-                </Icon>
-              </InputRightElement>
-            </InputGroup>
-            <FormErrorMessage>{matchError}</FormErrorMessage>
-          </FormControl>
-          <FormControl>
-            {!isLoading && (
-              <Button
-                type={"submit"}
-                leftIcon={<FaUserPlus />}
-                bg={bgCtaButtons(1)[colorMode]}
-                _hover={{
-                  backgroundColor: bgCtaButtons(0.8)[colorMode],
-                }}
-                color={fontCtaColor[colorMode]}
-                variant="solid"
-                mt={"6"}
-                textTransform={"uppercase"}
-                fontWeight="600"
-                fontFamily="inherit"
-                p={["4", "8"]}
-                fontSize={["sm", "md", "md", "md"]}
-                borderRadius="0.2rem"
-                w="100%"
-              >
-                Sign up
-              </Button>
-            )}
-            {isLoading && (
-              <Button
-                type={"submit"}
-                leftIcon={<FaUserPlus />}
-                bg={bgCtaButtons(1)[colorMode]}
-                _hover={{
-                  backgroundColor: bgCtaButtons(0.8)[colorMode],
-                }}
-                color={fontCtaColor[colorMode]}
-                variant="solid"
-                mt={"6"}
-                textTransform={"uppercase"}
-                fontWeight="600"
-                fontFamily="inherit"
-                p={["4", "8"]}
-                fontSize={["sm", "md", "md", "md"]}
-                borderRadius="0.2rem"
-                isLoading
-                loadingText="Setting up your account"
-                spinnerPlacement={"end"}
-                w="100%"
-              >
-                Sign up
-              </Button>
-            )}
-          </FormControl>
-          <hr />
-          <FormControl mt="1rem">
-            <Stack>
-              <Button
-                w={"full"}
-                h="3rem"
-                bg={colorMode === "light" ? "#FFFFFF" : "#4285F4"}
-                leftIcon={<FcGoogle />}
-                color={fontColor(1)[colorMode]}
-                borderColor={colorMode === "light" ? "#dddddd" : "#4285F"}
-              >
-                Sign up with Google
-              </Button>
-              <Button
-                w={"full"}
-                h="3rem"
-                colorScheme="facebook"
-                leftIcon={<FaFacebook />}
-              >
-                Sign up with Facebook
-              </Button>
-              <Button
-                w={"full"}
-                h="3rem"
-                colorScheme="twitter"
-                leftIcon={<FaTwitter />}
-              >
-                Sign up with Twitter
-              </Button>
-            </Stack>
-          </FormControl>
+                  Sign up
+                </Button>
+              )}
+              {isLoading && (
+                <Button
+                  type={"submit"}
+                  leftIcon={<FaUserPlus />}
+                  bg={bgCtaButtons(1)[colorMode]}
+                  _hover={{
+                    backgroundColor: bgCtaButtons(0.8)[colorMode],
+                  }}
+                  color={fontCtaColor[colorMode]}
+                  variant="solid"
+                  mt={"6"}
+                  textTransform={"uppercase"}
+                  fontWeight="600"
+                  fontFamily="inherit"
+                  p={["4", "8"]}
+                  fontSize={["sm", "md", "md", "md"]}
+                  borderRadius="0.2rem"
+                  isLoading
+                  loadingText="Setting up your account"
+                  spinnerPlacement={"end"}
+                  w="100%"
+                >
+                  Sign up
+                </Button>
+              )}
+            </FormControl>
+            <hr />
+            <FormControl mt="1rem">
+              <Stack>
+                <Button
+                  w={"full"}
+                  h="3rem"
+                  bg={colorMode === "light" ? "#FFFFFF" : "#4285F4"}
+                  leftIcon={<FcGoogle />}
+                  color={fontColor(1)[colorMode]}
+                  borderColor={colorMode === "light" ? "#dddddd" : "#4285F"}
+                >
+                  Sign up with Google
+                </Button>
+                <Button
+                  w={"full"}
+                  h="3rem"
+                  colorScheme="facebook"
+                  leftIcon={<FaFacebook />}
+                >
+                  Sign up with Facebook
+                </Button>
+                <Button
+                  w={"full"}
+                  h="3rem"
+                  colorScheme="twitter"
+                  leftIcon={<FaTwitter />}
+                >
+                  Sign up with Twitter
+                </Button>
+              </Stack>
+            </FormControl>
+          </Flex>
         </Flex>
-      </Flex>
+      </motion.div>
       <Footer />
     </>
   );

@@ -46,10 +46,11 @@ const Header = () => {
             fontSize="1.4rem"
           >
             <Image
-              src="./favicon_2.svg"
+              src="https://ik.imagekit.io/saudev001/ibshorter-project/tr:w-24,h-24/favicon_72jX9s3Rl.svg"
               alt="Logo Icon"
               boxSize={["24px", "36px"]}
               objectFit="cover"
+              width="24px"
             />
             <Text fontWeight={["semibold", "semibold", "medium", "medium"]}>
               IBShorter
